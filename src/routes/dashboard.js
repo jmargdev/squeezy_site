@@ -1,19 +1,22 @@
 const router = require('express').Router();
+const DiscordUser = require('../models/DiscordUser');
+const { ensureAuthenticated } = require('../config/auth');
 
-function isAuthenticated(req, res, next) {
-  if (req.user) {
-    // User is authenticated
-    return next();
+router.get('/', ensureAuthenticated, async (req, res) => {
+  const discordUser = await DiscordUser.findOne({ user: req.user.id });
+  if (!discordUser) {
+    return res.redirect('/');
   }
-  // User is not authenticated
-  res.redirect('/');
-}
-
-router.get('/', isAuthenticated, function (req, res) {
-  res.sendStatus(200);
+  res.render('dashboard', { discordUser });
 });
 
-router.get('/settings', isAuthenticated, function (req, res) {
+router.get('/info', ensureAuthenticated, async (req, res) => {
+  const discordUser = await DiscordUser.findOne({ user: req.user.id });
+  //console.log(req.user)
+  res.json(discordUser);
+});
+
+router.get('/settings', ensureAuthenticated, (req, res) => {
   res.sendStatus(200);
 });
 
