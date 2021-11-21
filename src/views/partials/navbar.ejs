@@ -18,22 +18,18 @@
         <div class="d-grid gap-2">
           <ul class="navbar-nav me-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= discordUser.username %></a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="/dashboard/info">Info</a>
+                <a class="dropdown-item" href="/dashboard/settings">Settings</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+                <a class="dropdown-item" href="/auth/logout">Logout</a>
               </div>
             </li>
           </ul>
         </div>
       </div>
       <% } %>
-      <div class="d-flex"><div class="d-grid gap-2">
-        <a href="<%= discordUser ? "/auth/logout" : "/auth" %>" class="btn btn-<%= discordUser ? "secondary" : "warning" %>"><%= discordUser ? "Logout" : "Login / Register" %></a>
-      </div></div>
     </div>
   </div>
 </nav>
